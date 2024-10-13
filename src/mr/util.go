@@ -31,6 +31,20 @@ const (
 	CompleteJob
 )
 
+func (phase JobType) String() string {
+	switch phase {
+	case MapJob:
+		return "MapJob"
+	case ReduceJob:
+		return "ReduceJob"
+	case WaitJob:
+		return "WaitJob"
+	case CompleteJob:
+		return "CompleteJob"
+	}
+	panic(fmt.Sprintf("unexpected SchedulePhase %d", phase))
+}
+
 type TaskStatus uint8
 
 const (
@@ -38,6 +52,18 @@ const (
 	Working
 	Finished
 )
+
+func (phase TaskStatus) String() string {
+	switch phase {
+	case Idle:
+		return "Idle"
+	case Working:
+		return "Working"
+	case Finished:
+		return "Finished"
+	}
+	panic(fmt.Sprintf("unexpected SchedulePhase %d", phase))
+}
 
 func generateMapResultFileName(mapNumber, reduceNumber int) string {
 	return fmt.Sprintf("mr-%d-%d", mapNumber, reduceNumber)
